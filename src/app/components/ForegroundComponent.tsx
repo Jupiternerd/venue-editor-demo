@@ -1,25 +1,20 @@
-"use client";
+import { useMemo } from "react";
+import WallPlaceable, { WallPlaceableProps } from "./placeable/Wall";
+import { Layer } from "react-konva";
 
-import { useEffect, useState } from "react";
-import { Circle, Layer } from "react-konva";
 
 type ForegroundComponentProps = Readonly<{
-	x: number;
-	y: number;
-    type?: 'table' | 'wall';
-    del?: boolean;
+    placeables: WallPlaceableProps[];
 }>;
 
 export default function ForegroundComponent({
-	x,
-	y,
-    del,
-    type = 'wall'
+    placeables
 }: ForegroundComponentProps) {
-
-	return (
-		<Layer>
-			<Circle x={x} y={y} radius={5} fill={type == "wall" ? "white" : "blue"} />
-		</Layer>
-	);
+    return (
+        <Layer>
+        {placeables.map((p) => (
+            <WallPlaceable key={p.id} id={p.id} x1={p.x1} y1={p.y1} x2={p.x2} y2={p.y2} />
+        ))}
+        </Layer>
+    );
 }

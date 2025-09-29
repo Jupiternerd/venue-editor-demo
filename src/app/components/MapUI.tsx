@@ -1,0 +1,48 @@
+"use client";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { useCurrentTool } from "../contexts/CurrentTool";
+
+export default function UILayer() {
+    const { tool, setTool } = useCurrentTool();
+	return (
+		<Card className="absolute bottom-40 right-5 w-48 p-0.5 bg-black/30 backdrop-blur-1xl border border-none">
+			<CardHeader className="p-2">Tool</CardHeader>
+			<CardContent className="p-0 flex flex-col gap-1">
+				<div className="grid grid-cols-2 gap-1">
+					<button
+						className="bg-white/20 hover:bg-white/30 text-white rounded p-1 text-sm"
+						onClick={() => {
+							setTool({type: "wall"});
+						}}
+					>
+						Wall
+					</button>
+					<button
+						className="bg-white/20 hover:bg-white/30 text-white rounded p-1 text-sm"
+						onClick={() => {
+							setTool({type: "table"});
+						}}
+					>
+						Table
+					</button>
+					<button
+						className="bg-white/20 hover:bg-white/30 text-white rounded p-1 text-sm"
+						onClick={() => {
+							setTool({type: "spawn"});
+						}}
+					>
+						Spawn
+					</button>
+                                        <button
+                        className="bg-white/20 hover:bg-white/30 text-red-500 rounded p-1 text-sm"
+                        onClick={() => {
+							setTool({type: "delete"});
+                        }}
+                    >
+                        Delete
+                    </button>
+				</div>
+			</CardContent>
+		</Card>
+	);
+}
