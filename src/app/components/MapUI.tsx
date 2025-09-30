@@ -3,7 +3,7 @@ import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { useCurrentTool } from "../contexts/CurrentTool";
 
 export default function UILayer() {
-    const { tool, setTool } = useCurrentTool();
+    const { setTool } = useCurrentTool();
 	return (
 		<Card className="absolute bottom-40 right-5 w-48 p-0.5 bg-black/30 backdrop-blur-1xl border border-none">
 			<CardHeader className="p-2">Tool</CardHeader>
@@ -12,7 +12,7 @@ export default function UILayer() {
 					<button
 						className="bg-white/20 hover:bg-white/30 text-white rounded p-1 text-sm"
 						onClick={() => {
-							setTool({type: "wall"});
+							setTool({type: "wall", data: {}});
 						}}
 					>
 						Wall
@@ -28,10 +28,10 @@ export default function UILayer() {
 					<button
 						className="bg-white/20 hover:bg-white/30 text-white rounded p-1 text-sm"
 						onClick={() => {
-							setTool({type: "spawn"});
+							setTool({type: "door"});
 						}}
 					>
-						Spawn
+						door
 					</button>
                                         <button
                         className="bg-white/20 hover:bg-white/30 text-red-500 rounded p-1 text-sm"

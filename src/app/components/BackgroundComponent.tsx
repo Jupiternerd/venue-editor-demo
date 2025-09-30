@@ -4,14 +4,12 @@ import { useMemo } from "react";
 import { Line, Layer } from "react-konva";
 
 type BackgroundComponentProps = Readonly<{
-    ref: React.RefObject<any>;
 	width: number;
 	height: number;
 	cellSize: number;
 }>;
 
 export default function BackgroundComponent({
-    ref,
 	width,
 	height,
 	cellSize,
@@ -28,7 +26,7 @@ export default function BackgroundComponent({
 	}, [width, height, cellSize]);
 
 	return (
-		<Layer ref={ref}>
+		<Layer>
 			{lines.map((line, i) => (
 				<Line
 					key={i}

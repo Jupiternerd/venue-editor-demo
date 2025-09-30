@@ -2,12 +2,12 @@
 import { createContext, useContext, useState } from "react";
 
 type Tool = {
-    type: "wall" | "table" | "spawn" | "delete" | "wall_2";
+    type: "wall" | "table" | "door" | "delete";
     data?: {
-        wallStart?: { x: number; y: number };
+		vertices?: { x: number; y: number }[];
     }
 }
-// wall_2 is for the 2nd click wall placement.
+
 
 const CurrentToolContext = createContext<{
 	tool: Tool;
