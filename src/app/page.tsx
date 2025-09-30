@@ -14,9 +14,6 @@ const CELL_SIZE = 30;
 export default function Home() {
 	const [viewport, setViewport] = useState({ width: 0, height: 0 });
 	const snapPos = useRef({ x: 0, y: 0 }); // incase we need it
-	const [placeables, setPlaceables] = useState<PlaceableTypesArr>([]);
-	const [isInThreePreview, setInThreePreview] = useState(false);
-
 	const stageRef = useRef<Konva.Stage | null>(null);
 
 	useEffect(() => {
@@ -30,12 +27,6 @@ export default function Home() {
 		window.addEventListener("resize", handleResize);
 		return () => window.removeEventListener("resize", handleResize);
 	}, []);
-
-	// 3D rendering 
-	if (isInThreePreview) {
-		return (<></>);
-
-	}
 
 	const stageSize = useMemo(
 		() => ({ width: viewport.width, height: viewport.height }),
@@ -54,16 +45,15 @@ export default function Home() {
 				height={HEIGHT}
 				cellSize={CELL_SIZE}
 			/>
-			<ForegroundComponent placeables={placeables} />
+			<ForegroundComponent />
 			<MouseComponent
 				mousePosRef={snapPos}
 				stageRef={stageRef}
 				gridHeight={HEIGHT}
 				gridWidth={WIDTH}
 				cellSize={CELL_SIZE}
-				placeables={placeables}
-				setPlaceables={setPlaceables}
 			/>
 		</Stage>
+
 	);
 }

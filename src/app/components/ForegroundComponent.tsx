@@ -4,18 +4,18 @@ import { Group, Layer } from "react-konva";
 import DoorPlaceable, { DoorPlaceableProps } from "./placeable/Door";
 import TablePlaceable, { TablePlaceableProps } from "./placeable/Table";
 import { PlaceableTypesArr } from "./placeable/Placeable";
+import { usePlacedObjects } from "../contexts/PlacedObjects";
 
 type ForegroundComponentProps = Readonly<{
-	placeables: PlaceableTypesArr
 }>;
 
 export default function ForegroundComponent({
-	placeables,
 }: ForegroundComponentProps) {
+    const {arr} = usePlacedObjects();
 	return (
 		<Layer>
 			<Group name="placeable">
-				{placeables.map((p) => {
+				{arr.map((p) => {
                     switch (p.type) {
                         // p is also props so we can spread it 
                         // (maybe storing it as props wasnt so bad afterall) [it is]

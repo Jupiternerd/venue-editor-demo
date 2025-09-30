@@ -16,6 +16,7 @@ import Konva from "konva";
 import { DoorPlaceableProps } from "./placeable/Door";
 import { TablePlaceableProps } from "./placeable/Table";
 import { PlaceableTypesArr } from "./placeable/Placeable";
+import { usePlacedObjects } from "../contexts/PlacedObjects";
 
 type MouseComponentProps = Readonly<{
 	mousePosRef: React.RefObject<{ x: number; y: number }>;
@@ -23,8 +24,6 @@ type MouseComponentProps = Readonly<{
 	gridWidth: number;
 	gridHeight: number;
 	cellSize: number;
-	placeables: PlaceableTypesArr;
-	setPlaceables: React.Dispatch<React.SetStateAction<PlaceableTypesArr>>;
 }>;
 
 const ToolColorMap: Record<string, string> = {
@@ -56,14 +55,13 @@ export default function MouseComponent({
 	stageRef,
 	gridHeight,
 	gridWidth,
-	placeables,
-	setPlaceables,
 	cellSize,
 }: MouseComponentProps) {
 	const rafRef = useRef<number | null>(null);
 	const { tool, setTool } = useCurrentTool();
 	const [snapPos, setSnapPos] = useState({ x: 0, y: 0 });
 	const nearestPlaceable = useRef<Konva.Node | null>(null);
+	const { arr: placeables, setArr: setPlaceables } = usePlacedObjects();
 
 	const updateSnapFromPointer = useCallback(() => {
 		const stage = stageRef.current;
@@ -120,7 +118,7 @@ export default function MouseComponent({
 						x2: snapPos.x,
 						y2: snapPos.y,
 					};
-					setPlaceables((prev) => [...prev, newWall]); // could be optimized
+					setPlaceables([...placeables, newWall]); // could be optimized
 					setTool({ type: "wall", data: {} });
 					break;
 				}
@@ -150,7 +148,7 @@ export default function MouseComponent({
 					x2: snapPos.x,
 					y2: snapPos.y,
 				};
-				setPlaceables((prev) => [...prev, newdoor]); // could be optimized
+				setPlaceables([...placeables, newdoor]); // could be optimized
 				setTool({ type: "door", data: {} });
 				break;
 			}
@@ -159,9 +157,7 @@ export default function MouseComponent({
 					const node = nearestPlaceable.current;
 					if (node) {
 						const id = node.id();
-						setPlaceables((prev) =>
-							prev.filter((p) => p.id !== id)
-						);
+						setPlaceables([...placeables.filter((p) => p.id !== id)]); // could def be optimized
 					}
 				}
 				break;
@@ -204,7 +200,7 @@ export default function MouseComponent({
 						vertices: verts,
 					} as TablePlaceableProps;
 					// add table
-					setPlaceables((prev) => [...prev, newTable]);
+					setPlaceables([...placeables, newTable]);
 					// reset tool
 					setTool({ type: "table", data: {} });
 					break;

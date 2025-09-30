@@ -8,7 +8,6 @@ type Tool = {
     }
 }
 
-
 const CurrentToolContext = createContext<{
 	tool: Tool;
 	setTool: (tool: Tool) => void;
