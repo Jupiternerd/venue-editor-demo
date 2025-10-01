@@ -3,10 +3,8 @@
 import {
 	useEffect,
 	useState,
-	useContext,
 	useCallback,
 	useRef,
-	useMemo,
 } from "react";
 import { Circle, Layer, Line } from "react-konva";
 import { useCurrentTool } from "../contexts/CurrentTool";
@@ -15,7 +13,6 @@ import { WallPlaceableProps } from "./placeable/Wall";
 import Konva from "konva";
 import { DoorPlaceableProps } from "./placeable/Door";
 import { TablePlaceableProps } from "./placeable/Table";
-import { PlaceableTypesArr } from "./placeable/Placeable";
 import { usePlacedObjects } from "../contexts/PlacedObjects";
 
 type MouseComponentProps = Readonly<{
@@ -28,9 +25,8 @@ type MouseComponentProps = Readonly<{
 
 const ToolColorMap: Record<string, string> = {
 	wall: "white",
-	table: "blue",
-	wall_2: "white",
-	door: "green",
+	table: "green",
+	door: "blue",
 	delete: "red",
 };
 
@@ -77,6 +73,8 @@ export default function MouseComponent({
 
 		const snapped = snapToGrid(pR.x, pR.y, cellSize, gridWidth, gridHeight);
 
+		console.log(snapped)
+
 		setSnapPos((prev) =>
 			prev.x === snapped.x && prev.y === snapped.y ? prev : snapped
 		);
@@ -85,7 +83,6 @@ export default function MouseComponent({
 	const handlePointer = useCallback(() => {
 		if (rafRef.current != null) return;
 		if (!stageRef.current) return;
-
 		rafRef.current = requestAnimationFrame(() => {
 			rafRef.current = null;
 			updateSnapFromPointer();

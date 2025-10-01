@@ -39,7 +39,6 @@ export default function RootLayout({
 				<PlacedObjectsProvider>
 					<CurrentToolProvider>
 						{children}
-						<UILayer />
 					</CurrentToolProvider>
 				</PlacedObjectsProvider>
 			</body>

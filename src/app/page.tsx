@@ -6,10 +6,9 @@ import BackgroundComponent from "./components/BackgroundComponent";
 import MouseComponent from "./components/MouseComponent";
 import ForegroundComponent from "./components/ForegroundComponent";
 import { PlaceableTypesArr } from "./components/placeable/Placeable";
+import UILayer from "./components/MapUI";
+import { CELL_SIZE, HEIGHT, WIDTH } from "./lib/Constants";
 
-const WIDTH = 1700;
-const HEIGHT = 1700;
-const CELL_SIZE = 30;
 
 export default function Home() {
 	const [viewport, setViewport] = useState({ width: 0, height: 0 });
@@ -34,26 +33,28 @@ export default function Home() {
 	);
 
 	return (
-		<Stage
-			ref={stageRef}
-			width={stageSize.width}
-			height={stageSize.height}
-			draggable
-		>
-			<BackgroundComponent
-				width={WIDTH}
-				height={HEIGHT}
-				cellSize={CELL_SIZE}
-			/>
-			<ForegroundComponent />
-			<MouseComponent
-				mousePosRef={snapPos}
-				stageRef={stageRef}
-				gridHeight={HEIGHT}
-				gridWidth={WIDTH}
-				cellSize={CELL_SIZE}
-			/>
-		</Stage>
-
+		<>
+			<Stage
+				ref={stageRef}
+				width={stageSize.width}
+				height={stageSize.height}
+				draggable
+			>
+				<BackgroundComponent
+					width={WIDTH}
+					height={HEIGHT}
+					cellSize={CELL_SIZE}
+				/>
+				<ForegroundComponent />
+				<MouseComponent
+					mousePosRef={snapPos}
+					stageRef={stageRef}
+					gridHeight={HEIGHT}
+					gridWidth={WIDTH}
+					cellSize={CELL_SIZE}
+				/>
+			</Stage>
+			<UILayer />
+		</>
 	);
 }

@@ -3,6 +3,7 @@ import { PlaceableProps } from "./Placeable";
 
 export type DoorPlaceableProps = PlaceableProps &
 	Readonly<{
+		type: "door";
 		x1: number;
 		y1: number;
 		x2: number;
@@ -20,7 +21,7 @@ export default function SpawnPlaceable({
 		<Line
 			id={id}
 			points={[x1, y1, x2, y2]}
-			stroke={"green"}
+			stroke={"blue"}
 			strokeWidth={3}
 			hitStrokeWidth={50}
 		/>
