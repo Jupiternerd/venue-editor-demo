@@ -1,7 +1,6 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 import {PlaceableTypesArr} from "../components/placeable/Placeable"
-
 type PlacedObjectsContextType = {
     arr: PlaceableTypesArr,
     setArr: (arr: PlaceableTypesArr) => void,
@@ -28,6 +27,18 @@ export function PlacedObjectsProvider({
             } catch (e) {
                 console.error("Failed to parse placedObjects from localStorage", e);
             }
+        } else {
+            // init with Test_Javits_Center.json
+            fetch("/Test_Javits_Center.json")
+                .then(res => res.json())
+                .then(json => {
+                    if (Array.isArray(json)) {
+                        setArr(json);
+                    }
+                })
+                .catch(err => {
+                    console.error("Failed to load initial placedObjects", err);
+                });
         }
         setIsLoading(false);
     }, [])
