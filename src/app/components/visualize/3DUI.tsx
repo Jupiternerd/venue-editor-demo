@@ -1,16 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
+import SelectedTableComponent from "./SelectedTable";
 
 export default function ThreeDUI() {
+    const router = useRouter()
 	return (
 		<>
 			<div className={"text-black z-0 absolute top-0 right-0"}>
 				<Button
 					className={"m-5"}
 					variant={"secondary"}
-					onClick={() => redirect("/")}
+					onClick={() => router.push("/")}
 				>
 					Exit 3D Visualization
 				</Button>
@@ -30,6 +32,7 @@ export default function ThreeDUI() {
 						</ul>
 					</CardDescription>
 				</Card>
+                <SelectedTableComponent/>
 			</div>
 		</>
 	);

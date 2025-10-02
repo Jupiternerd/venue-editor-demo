@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/app/lib/server/drivers/supaBase";
-export async function GET(Request: Request, {params}: {params: {slug: string}}) {
-    params = await params // why 
+export async function GET(Request: Request, context: { params: Promise<{ slug: string }> }) {
+    let params = await context.params 
     const slug = params.slug;
     const supabase = await createClient(
     );

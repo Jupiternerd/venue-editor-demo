@@ -69,6 +69,8 @@ export default function Home() {
 				<directionalLight position={[-15, 6, 20]} intensity={1} />
 				<group
 					onPointerEnter={(e) => {
+						// set mouse to pointer
+						document.body.style.cursor = "pointer";
 						e.stopPropagation();
 						// mchanges material to indicate hover
 						const data = e.object.userData as
@@ -85,6 +87,8 @@ export default function Home() {
 						}
 					}}
 					onPointerLeave={(e) => {
+						// reset mouse
+						document.body.style.cursor = "default";
 						e.stopPropagation();
 						// revert material
 						const data = e.object.userData as {
@@ -108,6 +112,8 @@ export default function Home() {
 									assignedVendorId?: string;
 							  }
 						if (data?.type === "table") {
+							console.log("clicked table", data);
+							setTool({ type: "selected", data: { selectedId: data.assignedVendorId } });
 						}
 					}}
 				>
@@ -247,7 +253,6 @@ export default function Home() {
 					/>
 				</group>
 			</Canvas>
-			<VendorSelectionScreen/>
 			<ThreeDUI />
 		</div>
 	);

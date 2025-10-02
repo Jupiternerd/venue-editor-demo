@@ -13,8 +13,8 @@ export default function TablePlaceable({ vertices, id, assignedVendorId }: Table
 		<Line
 			id={id}
 			points={vertices.flatMap((v) => [v.x, v.y])}
-			stroke={assignedVendorId ? "green" : "red"}
-			strokeWidth={2}
+			stroke={assignedVendorId ? "blue" : "red"}
+			strokeWidth={3}
 			fill={"green"}
 			opacity={0.3}
 			hitStrokeWidth={50}

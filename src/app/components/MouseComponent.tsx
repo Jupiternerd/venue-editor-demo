@@ -14,6 +14,7 @@ import Konva from "konva";
 import { DoorPlaceableProps } from "./placeable/Door";
 import { TablePlaceableProps } from "./placeable/Table";
 import { usePlacedObjects } from "../contexts/PlacedObjects";
+import { PlaceableProps } from "./placeable/Placeable";
 
 type MouseComponentProps = Readonly<{
 	mousePosRef: React.RefObject<{ x: number; y: number }>;
@@ -206,6 +207,26 @@ export default function MouseComponent({
 					data: { vertices: [...verts, snapPos] },
 				});
 				break;
+			}
+
+			case "selected": {
+				if (nearestPlaceable) {
+					const node = nearestPlaceable.current;
+					if (node) {
+						const id = node.id();
+						// find placeable with id
+						const placeable = placeables.find((p) => p.id === id);
+						if (!placeable || !tool.data) break;
+						if (placeable.type === "table") {
+							// create the table again but with the new data
+							const newTable = {
+								...placeable,
+								assignedVendorId: tool.data.selectedId,
+							} as TablePlaceableProps
+							setPlaceables([...placeables.filter((p) => p.id !== id), newTable]); // could def be optimized
+						}
+					}
+				}
 			}
 
 			default:

@@ -17,8 +17,10 @@ import {
 } from "@/components/ui/alert-dialog";
 import { redirect, RedirectType } from "next/navigation";
 import { Input } from "@/components/ui/input";
+import { useRouter } from 'next/navigation'
 
 export default function UILayer() {
+	const router = useRouter();
 	const { setTool } = useCurrentTool();
 	const { setArr, arr } = usePlacedObjects();
 	const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -148,7 +150,7 @@ export default function UILayer() {
 					<Button
 						className={"bg-green-400"}
 						onClick={() => {
-							redirect("/visualize", RedirectType.push);
+							router.push("/visualize");
 						}}
 					>
 						3D Visualize
