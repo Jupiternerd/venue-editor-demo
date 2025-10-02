@@ -4,6 +4,9 @@ import "./globals.css";
 import { CurrentToolProvider } from "./contexts/CurrentTool";
 import UILayer from "./components/MapUI";
 import { PlacedObjectsProvider } from "./contexts/PlacedObjects";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -26,7 +29,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" suppressHydrationWarning>
+		<html lang="en" suppressHydrationWarning className={"dark"}>
 			<head>
 				<script
 					crossOrigin="anonymous"
@@ -36,11 +39,11 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				<PlacedObjectsProvider>
-					<CurrentToolProvider>
-						{children}
-					</CurrentToolProvider>
-				</PlacedObjectsProvider>
+				<QueryClientProvider client={queryClient}>
+					<PlacedObjectsProvider>
+						<CurrentToolProvider>{children}</CurrentToolProvider>
+					</PlacedObjectsProvider>
+				</QueryClientProvider>
 			</body>
 		</html>
 	);
