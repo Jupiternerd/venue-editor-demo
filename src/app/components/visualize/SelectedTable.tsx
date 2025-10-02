@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { redirect, RedirectType } from "next/navigation";
 
 export default function SelectedTableComponent() {
 	const { tool } = useCurrentTool();
@@ -55,6 +56,9 @@ export default function SelectedTableComponent() {
 				<Image
 					src={vendor.data.logoUrl || "/placeholder.png"}
 					alt={vendor.data.name}
+					onClick={() => {
+						redirect(`${vendor.data.websiteUrl}`);
+					}}
 					width={100}
 					height={100}
 					className={
@@ -64,15 +68,12 @@ export default function SelectedTableComponent() {
 				<CardDescription className={"text-black text-lg px-2 py-2"}>
 					{vendor.data.name}
 				</CardDescription>
-				<CardDescription className={"text-black text-md px-2 py-0"}>
+				<CardDescription className={"text-black text-sm px-2 py-0"}>
 					{vendor.data.description}
-                    {vendor.data.websiteUrl && (
-                        <a href={vendor.data.websiteUrl} target="_blank"> Website Link</a>
-                    )}
                     {vendor.data.tags && vendor.data.tags.length > 0 && (
                         <div className={"mt-2"}>
                             {vendor.data.tags.map((tag) => (
-                                <Badge key={tag} className={"mr-2"}>{tag}</Badge>
+                                <Badge key={tag} className={"mr-2 bg-amber-200"}>{tag}</Badge>
                             ))}
                         </div>
                     )}  

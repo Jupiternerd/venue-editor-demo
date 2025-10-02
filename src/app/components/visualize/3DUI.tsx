@@ -20,7 +20,7 @@ export default function ThreeDUI() {
 
 			<div className={"text-black z-0 absolute top-0 left-0"}>
 				<Card className={"m-5 bg-amber-50 shadow-sm"}>
-					<CardDescription className={"text-black text-lg px-4 py-0"}>
+					<CardDescription className={"text-black text-sm px-4 py-0"}>
 						<ul className={"list-disc pl-6"}>
 							<li>Left mouse button to rotate, scroll to zoom and right mouse to pan.</li>
 							<li>

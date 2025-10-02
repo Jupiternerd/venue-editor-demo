@@ -39,7 +39,8 @@ export default function Home() {
 	}, [WIDTH, HEIGHT]);
 
 	useEffect(() => {
-		console.log("mounted");
+		// clear the tool on mount
+		setTool({ type: "selected", data: {} });
 	}, [])
 
 	return (
