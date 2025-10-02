@@ -73,8 +73,6 @@ export default function MouseComponent({
 
 		const snapped = snapToGrid(pR.x, pR.y, cellSize, gridWidth, gridHeight);
 
-		console.log(snapped)
-
 		setSnapPos((prev) =>
 			prev.x === snapped.x && prev.y === snapped.y ? prev : snapped
 		);

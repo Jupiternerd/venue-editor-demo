@@ -23,7 +23,6 @@ export default function UILayer() {
 	const { setArr, arr } = usePlacedObjects();
 	const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-
 	const loadJSONFile = useCallback(() => {
 		const e = fileInputRef.current;
 		if (!e?.files?.[0]) {

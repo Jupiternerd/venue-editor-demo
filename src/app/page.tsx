@@ -5,9 +5,9 @@ import { Stage } from "react-konva";
 import BackgroundComponent from "./components/BackgroundComponent";
 import MouseComponent from "./components/MouseComponent";
 import ForegroundComponent from "./components/ForegroundComponent";
-import { PlaceableTypesArr } from "./components/placeable/Placeable";
 import UILayer from "./components/MapUI";
 import { CELL_SIZE, HEIGHT, WIDTH } from "./lib/Constants";
+import VendorSelectionScreen from "./components/VendorsSelectionScreen";
 
 
 export default function Home() {
@@ -54,6 +54,7 @@ export default function Home() {
 					cellSize={CELL_SIZE}
 				/>
 			</Stage>
+			<VendorSelectionScreen/>
 			<UILayer />
 		</>
 	);

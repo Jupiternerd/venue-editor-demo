@@ -2,9 +2,10 @@
 import { createContext, useContext, useState } from "react";
 
 type Tool = {
-    type: "wall" | "table" | "door" | "delete";
+    type: "wall" | "table" | "door" | "delete" | "selected";
     data?: {
 		vertices?: { x: number; y: number }[];
+		selectedId?: string;
     }
 }
 

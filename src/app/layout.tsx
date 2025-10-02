@@ -2,11 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { CurrentToolProvider } from "./contexts/CurrentTool";
-import UILayer from "./components/MapUI";
 import { PlacedObjectsProvider } from "./contexts/PlacedObjects";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-const queryClient = new QueryClient();
+import QueryProviders from "./contexts/ReactQuery";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -39,11 +37,11 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				<QueryClientProvider client={queryClient}>
+				<QueryProviders>
 					<PlacedObjectsProvider>
 						<CurrentToolProvider>{children}</CurrentToolProvider>
 					</PlacedObjectsProvider>
-				</QueryClientProvider>
+				</QueryProviders>
 			</body>
 		</html>
 	);
